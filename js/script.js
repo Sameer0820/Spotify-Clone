@@ -5,7 +5,7 @@ let songs;
 let laststate = 50;
 
 async function getSongs(folder) {
-  let a = await fetch(`/public/songs/${folder}`);
+  let a = await fetch(`/songs/${folder}`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -48,7 +48,7 @@ const switchPlayPause = (musicstate) => {
 };
 
 async function displayAlbums() {
-  let a = await fetch(`/public/songs/`);
+  let a = await fetch(`/songs/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -58,7 +58,7 @@ async function displayAlbums() {
     const e = array[index];
     if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
       let folder = e.href.split("/").slice(-2)[0];
-      let a = await fetch(`/public/songs/${folder}/info.json`);
+      let a = await fetch(`/songs/${folder}/info.json`);
       let response = await a.json();
       document.querySelector(".cardContainer").innerHTML =
         document.querySelector(".cardContainer").innerHTML +
@@ -67,7 +67,7 @@ async function displayAlbums() {
                 <img src="img/playButton.svg" alt="play" />
               </div>
               <img
-                src= "/public/songs/${folder}/cover.jpg" alt=""
+                src= "/songs/${folder}/cover.jpg" alt=""
               />
               <h4>${response.title}</h4>
               <p>${response.description}</p>
